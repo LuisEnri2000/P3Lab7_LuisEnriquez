@@ -71,7 +71,7 @@ class Logger {
 			escribir.close();
 		}
 		
-		void listar(){
+		int listar(){
 			ifstream leer("./logs.bin", ios::in | ios::binary);
 			fstream escribir("./logs.bin", ios::out | ios::binary | ios::app);
 			
@@ -80,7 +80,7 @@ class Logger {
 			if(!leer){
 				cout<<"Problema al abrir el archivo"<<endl;
 				system("pause");
-				return ;
+				return 0;
 			}
 			
 			leer.seekg(0,ios::beg); //beg = begin
@@ -92,13 +92,15 @@ class Logger {
 				//cout << endl;
 			//}
 			
-
+			int x = 0;
 			while( !leer.eof() ) {
 				leer.read(reinterpret_cast<char*>(&y), sizeof(Log));
 				cout << y.print() << endl;
+				x++;
 			}
 
 			leer.close();
+			return x;
 		}
 
 };

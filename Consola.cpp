@@ -21,12 +21,14 @@ class Consola {
 	private:
 		char usuario[50];
 		Logger* logger;
+		int cont;
 		
 	public:
 		
 		Consola(string u, string n) {
 			setUsuario(u);
 			logger = new Logger(usuario, n, 0);
+			cont = logger->listar();
 		}
 		
 		void setUsuario(string nombreCompleto)
@@ -39,6 +41,8 @@ class Consola {
     	}
     	
     	void cmd() {
+    		
+    		
     		string comando = "LIT FAM";
     		
     		while (comando != "exit") {
@@ -46,21 +50,16 @@ class Consola {
  
 	    			cout << "Comando: ";
 	    			cin >> comando;
-	    			
-	    			
-	    			
 	    			if (comando != "listar") {
 	    				validarComando(comando);
 	    				system(comando.c_str());
-	    				logger->agregar(new Log(usuario, comando, 0));
+	    				logger->agregar(new Log(usuario, comando, cont));
 	    				//logger->getLogs().push_back(new Log(usuario, comando, logger->getLogs().size() - 1));
 	    				cout << "Listo." << endl;
+	    				cont++;
 	    			}else{
-	    				logger->listar();
-					}
-				
-				
-				
+	    				cont = logger->listar();
+					}			
 			}	
 		}
 		

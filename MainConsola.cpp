@@ -16,7 +16,7 @@ int main() {
 
 	consola->cmd();	
 	
-	
+	delete consola;
 }
 
 
